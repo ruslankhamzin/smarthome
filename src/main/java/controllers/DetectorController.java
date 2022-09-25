@@ -15,14 +15,6 @@ public class DetectorController {
                          @RequestParam("description") String description,
                          @RequestParam("name") String name,
                          Model model) {
-        model.addAttribute("id", detector.getId);
-        model.addAttribute("owner_email", detector.getOwnerEmail);
-        model.addAttribute("location_id", detector.getLocationId);
-        model.addAttribute("description", detector.getDescription);
-        model.addAttribute("name", detector.getName);
-        model.addAttribute("registration_date", detector.getRegistrationDate);
-        model.addAttribute("last_active_date", detector.getLastActiveDate);
-        model.addAttribute("active", detector.getActive);
         model.addAttribute("message", "notification has been sent.");
         return "";
     }
