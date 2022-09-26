@@ -15,7 +15,7 @@ public class DetectorController {
                          @RequestParam("description") String description,
                          @RequestParam("name") String name,
                          Model model) {
-        model.addAttribute("message", "notification has been sent.");
+        model.addAttribute("message", "detector was created.");
         return "";
     }
 }
