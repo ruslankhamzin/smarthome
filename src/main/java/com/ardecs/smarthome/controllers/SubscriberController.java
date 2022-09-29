@@ -1,19 +1,28 @@
 package com.ardecs.smarthome.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.ardecs.smarthome.DAO.SubscriberDAO;
+import com.ardecs.smarthome.models.Subscriber;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping(value = "/subscriber")
 public class SubscriberController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SubscriberController.class);
+    @Autowired
+    private SubscriberDAO subscriberDAO;
+
     @PostMapping("/subscribe")
-    public String subscribe(@RequestParam("detector_id") String id,
-                            @RequestParam("owner_email") String email,
-                            Model model) {
-        model.addAttribute("message", "subscribe request sent");
-        return "";
+    public Subscriber subscribe(@RequestParam String detectorId,
+                                @RequestParam String ownerEmail) {
+        Subscriber subscriber = new Subscriber(detectorId, ownerEmail);
+        subscriberDAO.save(subscriber);
+        LOGGER.info("subscribe request sent:" + subscriber);
+        return subscriber;
     }
 }
