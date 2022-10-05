@@ -1,12 +1,20 @@
 package com.ardecs.smarthome.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "detector")
 public class Detector implements Serializable {
-    private final LocalDateTime registration_date;
-    private UUID id;
+    @Id
+    private String id;
+
+    private LocalDateTime registration_date;
     private String ownerEmail;
     private String locationId;
     private String description;
@@ -14,22 +22,19 @@ public class Detector implements Serializable {
     private LocalDateTime last_active_date;
     private boolean active;
 
-    public Detector(String ownerEmail, String locationId, String description, String name) {
-        this.ownerEmail = ownerEmail;
-        this.locationId = locationId;
-        this.description = description;
-        this.name = name;
-        id = UUID.randomUUID();
+    @PrePersist
+    private void init() {
+        id = String.valueOf(UUID.randomUUID());
         registration_date = LocalDateTime.now();
         last_active_date = LocalDateTime.now();
         active = true;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 

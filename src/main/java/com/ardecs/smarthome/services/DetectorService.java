@@ -1,7 +1,6 @@
 package com.ardecs.smarthome.services;
 
 import com.ardecs.smarthome.DTO.DetectorDTO;
-import com.ardecs.smarthome.controllers.DetectorController;
 import com.ardecs.smarthome.models.Detector;
 import com.ardecs.smarthome.repository.DetectorRepository;
 import org.slf4j.Logger;
@@ -14,7 +13,8 @@ public class DetectorService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectorService.class);
     @Autowired
     private DetectorRepository detectorRepository;
-    public Detector create(DetectorDTO detectorDTO){
+
+    public Detector create(DetectorDTO detectorDTO) {
         Detector detector = new Detector();
         detector.setName(detectorDTO.getName());
         detector.setDescription(detectorDTO.getDescription());
