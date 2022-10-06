@@ -1,4 +1,4 @@
-package com.ardecs.smarthome.models;
+package com.ardecs.smarthome.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,4 +1,4 @@
-package com.ardecs.smarthome.models;
+package com.ardecs.smarthome.model;
 
 import java.io.Serializable;
 import java.util.UUID;

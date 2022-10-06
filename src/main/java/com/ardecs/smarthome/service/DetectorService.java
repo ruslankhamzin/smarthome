@@ -1,7 +1,7 @@
-package com.ardecs.smarthome.services;
+package com.ardecs.smarthome.service;
 
-import com.ardecs.smarthome.DTO.DetectorDTO;
-import com.ardecs.smarthome.models.Detector;
+import com.ardecs.smarthome.dto.DetectorDTO;
+import com.ardecs.smarthome.model.Detector;
 import com.ardecs.smarthome.repository.DetectorRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

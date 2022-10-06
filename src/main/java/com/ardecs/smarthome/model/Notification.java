@@ -1,16 +1,16 @@
-package com.ardecs.smarthome.DTO;
+package com.ardecs.smarthome.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public class NotificationDTO implements Serializable {
+public class Notification implements Serializable {
     private UUID id;
     private String detectorId;
     private String type;
     private LocalDateTime date;
 
-    public NotificationDTO(String detectorId, String type, LocalDateTime date) {
+    public Notification(String detectorId, String type, LocalDateTime date) {
         id = UUID.randomUUID();
         this.detectorId = detectorId;
         this.type = type;

@@ -1,7 +1,7 @@
-package com.ardecs.smarthome.controllers;
+package com.ardecs.smarthome.controller;
 
-import com.ardecs.smarthome.DTO.DetectorDTO;
-import com.ardecs.smarthome.services.DetectorService;
+import com.ardecs.smarthome.dto.DetectorDTO;
+import com.ardecs.smarthome.service.DetectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

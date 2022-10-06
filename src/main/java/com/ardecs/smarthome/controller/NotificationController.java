@@ -1,7 +1,7 @@
-package com.ardecs.smarthome.controllers;
+package com.ardecs.smarthome.controller;
 
 
-import com.ardecs.smarthome.DTO.NotificationDTO;
+import com.ardecs.smarthome.dto.NotificationDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PostMapping;

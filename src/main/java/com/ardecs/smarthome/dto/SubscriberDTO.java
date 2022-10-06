@@ -1,27 +1,11 @@
-package com.ardecs.smarthome.DTO;
+package com.ardecs.smarthome.dto;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 public class SubscriberDTO implements Serializable {
-    private UUID id;
     private String detectorID;
     private String ownerEmail;
-
-    public SubscriberDTO(String detectorID, String ownerEmail) {
-        id = UUID.randomUUID();
-        this.detectorID = detectorID;
-        this.ownerEmail = ownerEmail;
-    }
-
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getDetectorID() {
         return detectorID;
@@ -42,8 +26,7 @@ public class SubscriberDTO implements Serializable {
     @Override
     public String toString() {
         return "SubscriberDAO{" +
-                "id=" + id +
-                ", detectorID='" + detectorID + '\'' +
+                "detectorID='" + detectorID + '\'' +
                 ", ownerEmail='" + ownerEmail + '\'' +
                 '}';
     }

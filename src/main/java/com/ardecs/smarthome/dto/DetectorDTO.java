@@ -1,4 +1,4 @@
-package com.ardecs.smarthome.DTO;
+package com.ardecs.smarthome.dto;
 
 import java.io.Serializable;
 
@@ -6,7 +6,6 @@ public class DetectorDTO implements Serializable {
     private String ownerEmail;
     private String locationId;
     private String description;
-
     private String name;
 
     public DetectorDTO(String ownerEmail, String locationId, String description, String name) {
