@@ -1,37 +1,23 @@
 package com.ardecs.smarthome.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table
 public class Notification implements Serializable {
-    private UUID id;
-    private String detectorId;
+    @Id
+    @Column(name = "id", nullable = false, length = 36)
+    private String id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "detector_id", nullable = false)
+    private Detector detector;
+
+    @Column(name = "type", nullable = false, length = 50)
     private String type;
-    private LocalDateTime date;
-
-    public Notification(String detectorId, String type, LocalDateTime date) {
-        id = UUID.randomUUID();
-        this.detectorId = detectorId;
-        this.type = type;
-        this.date = date;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getDetectorId() {
-        return detectorId;
-    }
-
-    public void setDetectorId(String detectorId) {
-        this.detectorId = detectorId;
-    }
 
     public String getType() {
         return type;
@@ -41,21 +27,19 @@ public class Notification implements Serializable {
         this.type = type;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public Detector getDetector() {
+        return detector;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 
-    @Override
-    public String toString() {
-        return "NotificationDAO{" +
-                "id=" + id +
-                ", detectorId='" + detectorId + '\'' +
-                ", type='" + type + '\'' +
-                ", date=" + date +
-                '}';
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -1,51 +1,35 @@
 package com.ardecs.smarthome.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
+@Entity
+@Table
 public class Subscriber implements Serializable {
-    private UUID id;
-    private String detectorID;
-    private String ownerEmail;
 
-    public Subscriber(String detectorID, String ownerEmail) {
-        id = UUID.randomUUID();
-        this.detectorID = detectorID;
-        this.ownerEmail = ownerEmail;
+    @Id
+    private String id;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "detector_id", nullable = false)
+    private Detector detector;
+
+    public Detector getDetector() {
+        return detector;
     }
 
-
-    public UUID getId() {
-        return id;
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public User getUser() {
+        return user;
     }
 
-    public String getDetectorID() {
-        return detectorID;
+    public void setUser(User user) {
+        this.user = user;
     }
-
-    public void setDetectorID(String detectorID) {
-        this.detectorID = detectorID;
-    }
-
-    public String getOwnerEmail() {
-        return ownerEmail;
-    }
-
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
-
-    @Override
-    public String toString() {
-        return "SubscriberDAO{" +
-                "id=" + id +
-                ", detectorID='" + detectorID + '\'' +
-                ", ownerEmail='" + ownerEmail + '\'' +
-                '}';
-    }
-
 }

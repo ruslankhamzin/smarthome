@@ -1,79 +1,89 @@
 package com.ardecs.smarthome.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 
 @Entity
-@Table(name = "detector")
+@Table
 public class Detector implements Serializable {
     @Id
+    @Column(name = "id", nullable = false)
     private String id;
 
-    private LocalDateTime registration_date;
-    private String ownerEmail;
-    private String locationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_email")
+    private User ownerEmail;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "location_id", nullable = false)
+    private Location location;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "name")
     private String name;
-    private LocalDateTime last_active_date;
-    private boolean active;
 
-    @PrePersist
-    private void init() {
-        id = String.valueOf(UUID.randomUUID());
-        registration_date = LocalDateTime.now();
-        last_active_date = LocalDateTime.now();
-        active = true;
+    @Column(name = "registration_date", nullable = false)
+    private Instant registrationDate;
+
+    @Column(name = "last_active_date")
+    private Instant lastActiveDate;
+
+    @Column(name = "active")
+    private Boolean active;
+
+    @OneToMany(mappedBy = "detector")
+    private Set<Notification> notifications = new LinkedHashSet<>();
+
+    @ManyToMany(mappedBy = "subscribers")
+    private Set<User> users = new LinkedHashSet<>();
+
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public String getId() {
-        return id;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Set<Notification> getNotifications() {
+        return notifications;
     }
 
-    public String getOwnerEmail() {
-        return ownerEmail;
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
     }
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public Boolean getActive() {
+        return active;
     }
 
-    public String getLocationId() {
-        return locationId;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
+    public Instant getLastActiveDate() {
+        return lastActiveDate;
     }
 
-    public String getDescription() {
-        return description;
+    public void setLastActiveDate(Instant lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public Instant getRegistrationDate() {
+        return registrationDate;
     }
 
-    @Override
-    public String toString() {
-        return "DetectorDAO{" +
-                "registration_date=" + registration_date +
-                ", id=" + id +
-                ", ownerEmail='" + ownerEmail + '\'' +
-                ", locationId='" + locationId + '\'' +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                ", last_active_date=" + last_active_date +
-                ", active=" + active +
-                '}';
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
     public String getName() {
@@ -84,23 +94,35 @@ public class Detector implements Serializable {
         this.name = name;
     }
 
-    public LocalDateTime getRegistration_date() {
-        return registration_date;
+    public String getDescription() {
+        return description;
     }
 
-    public LocalDateTime getLast_active_date() {
-        return last_active_date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setLast_active_date(LocalDateTime last_active_date) {
-        this.last_active_date = last_active_date;
+    public Location getLocation() {
+        return location;
     }
 
-    public boolean isActive() {
-        return active;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public User getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(User ownerEmail) {
+        this.ownerEmail = ownerEmail;
     }
 }
