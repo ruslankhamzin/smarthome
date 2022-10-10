@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class DetectorDTO implements Serializable {
     private User ownerEmail;
-    private Location locationId;
+    private Location location;
     private String description;
     private String name;
 
@@ -21,11 +21,11 @@ public class DetectorDTO implements Serializable {
     }
 
     public Location getLocationId() {
-        return locationId;
+        return location;
     }
 
     public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+        this.location = locationId;
     }
 
     public String getDescription() {

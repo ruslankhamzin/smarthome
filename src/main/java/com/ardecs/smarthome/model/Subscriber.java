@@ -10,6 +10,7 @@ public class Subscriber implements Serializable {
     @Id
     @Column
     private String id;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;

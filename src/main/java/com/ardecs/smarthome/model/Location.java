@@ -18,7 +18,7 @@ public class Location {
     @Column
     private Integer square;
 
-    @OneToMany(mappedBy = "locationId")
+    @OneToMany(mappedBy = "location")
     private Set<Detector> detectors = new LinkedHashSet<>();
 
     public Set<Detector> getDetectors() {

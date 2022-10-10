@@ -6,16 +6,16 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class NotificationDTO implements Serializable {
-    private Detector detectorId;
+    private Detector detector;
     private String type;
     private Instant date;
 
-    public Detector getDetectorId() {
-        return detectorId;
+    public Detector getDetector() {
+        return detector;
     }
 
-    public void setDetectorId(Detector detectorId) {
-        this.detectorId = detectorId;
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 
     public String getType() {

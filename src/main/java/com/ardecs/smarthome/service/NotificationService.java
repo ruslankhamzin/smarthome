@@ -21,7 +21,7 @@ public class NotificationService {
 
     public String send(NotificationDTO notificationDTO) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(detectorService.findOwnerEmailById(notificationDTO.getDetectorId().getId()));
+        mailMessage.setTo(detectorService.findOwnerEmailById(notificationDTO.getDetector().getId()));
         mailMessage.setText("Датчик: " + notificationDTO.getType() + " сработал в: " + notificationDTO.getDate());
         mailSender.send(mailMessage);
         notificationRepository.save(notificationDTOToNotification(notificationDTO));
@@ -31,7 +31,7 @@ public class NotificationService {
     public Notification notificationDTOToNotification(NotificationDTO notificationDTO) {
         Notification notification = new Notification();
         notification.setId(String.valueOf(UUID.randomUUID()));
-        notification.setDetectorId(notificationDTO.getDetectorId());
+        notification.setDetectorId(notificationDTO.getDetector());
         notification.setType(notificationDTO.getType());
         return notification;
     }

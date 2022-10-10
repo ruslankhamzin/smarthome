@@ -24,7 +24,7 @@ public class DetectorService {
         detector.setLastActiveDate(Instant.now());
         detector.setName(detectorDTO.getName());
         detector.setDescription(detectorDTO.getDescription());
-        detector.setLocationId(detectorDTO.getLocationId());
+        detector.setLocation(detectorDTO.getLocationId());
         detector.setOwnerEmail(detectorDTO.getOwnerEmail());
         detector.setActive(true);
         detector.setRegistrationDate(Instant.now());
@@ -38,7 +38,7 @@ public class DetectorService {
         detectorResponseDTO.setActive(detector.getActive());
         detectorResponseDTO.setDescription(detector.getDescription());
         detectorResponseDTO.setName(detector.getName());
-        detectorResponseDTO.setLocation(detector.getLocationId());
+        detectorResponseDTO.setLocation(detector.getLocation());
         detectorResponseDTO.setOwnerEmail(detector.getOwnerEmail());
         detectorResponseDTO.setLastActiveDate(detector.getLastActiveDate());
         detectorResponseDTO.setMessage("Detector successfully added");

@@ -20,7 +20,7 @@ public class Detector implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    private Location locationId;
+    private Location location;
 
     @Column
     private String description;
@@ -29,9 +29,11 @@ public class Detector implements Serializable {
     private String name;
 
     @Column
+    @Temporal(TemporalType.DATE)
     private Instant registrationDate;
 
     @Column
+    @Temporal(TemporalType.DATE)
     private Instant lastActiveDate;
 
     @Column
@@ -59,12 +61,12 @@ public class Detector implements Serializable {
         this.ownerEmail = ownerEmail;
     }
 
-    public Location getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getDescription() {
