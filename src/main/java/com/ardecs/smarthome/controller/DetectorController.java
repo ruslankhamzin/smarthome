@@ -18,10 +18,10 @@ public class DetectorController {
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectorController.class);
     @Autowired
     private DetectorService detectorService;
-/*
+
     @PostMapping("/create")
     public DetectorResponseDTO create(@RequestBody DetectorDTO detector) {
         LOGGER.info("detectorDTO was created and save:" + detector);
         return detectorService.create(detector);
-    }*/
+    }
 }

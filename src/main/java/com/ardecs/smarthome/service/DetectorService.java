@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -18,29 +18,35 @@ public class DetectorService {
     @Autowired
     private DetectorRepository detectorRepository;
 
-   /* public DetectorResponseDTO create(DetectorDTO detectorDTO) {
-      /*  Detector detector = new Detector();
+    public DetectorResponseDTO create(DetectorDTO detectorDTO) {
+        Detector detector = new Detector();
         detector.setId(String.valueOf(UUID.randomUUID()));
-        detector.setLastActiveDate(LocalDateTime.now());
+        detector.setLastActiveDate(Instant.now());
         detector.setName(detectorDTO.getName());
         detector.setDescription(detectorDTO.getDescription());
-        detector.setLocation(detectorDTO.getLocationId());
+        detector.setLocationId(detectorDTO.getLocationId());
         detector.setOwnerEmail(detectorDTO.getOwnerEmail());
         detector.setActive(true);
-        detector.setLastActiveDate(LocalDateTime.now());
+        detector.setRegistrationDate(Instant.now());
         detectorRepository.save(detector);
         return detectorToDetectorResponseDTO(detector);
     }
-    public DetectorResponseDTO detectorToDetectorResponseDTO(Detector detector){
+
+    public DetectorResponseDTO detectorToDetectorResponseDTO(Detector detector) {
         DetectorResponseDTO detectorResponseDTO = new DetectorResponseDTO();
         detectorResponseDTO.setId(detector.getId());
-        detectorResponseDTO.setActive(detector.isActive());
+        detectorResponseDTO.setActive(detector.getActive());
         detectorResponseDTO.setDescription(detector.getDescription());
         detectorResponseDTO.setName(detector.getName());
-        detectorResponseDTO.setLocationId(detector.getLocation());
-        detectorResponseDTO.setOwnerEmail(detector.getEmail());
-        detectorResponseDTO.setLast_active_date(detector.getLastActiveDate());
+        detectorResponseDTO.setLocation(detector.getLocationId());
+        detectorResponseDTO.setOwnerEmail(detector.getOwnerEmail());
+        detectorResponseDTO.setLastActiveDate(detector.getLastActiveDate());
         detectorResponseDTO.setMessage("Detector successfully added");
         return detectorResponseDTO;
-    }*/
+    }
+
+    public String findOwnerEmailById(String detectorId) {
+        String ownerEmail = detectorRepository.findById(detectorId).orElseThrow(() -> new IllegalArgumentException("Такого датчика не существует"));
+        return ownerEmail;
+    }
 }

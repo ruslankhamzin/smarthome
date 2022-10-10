@@ -1,8 +1,5 @@
 package com.ardecs.smarthome.model;
 
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -23,92 +20,28 @@ public class Detector implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    private Location location;
+    private Location locationId;
 
-    @Column(name = "description")
+    @Column
     private String description;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column
     private Instant registrationDate;
 
-    @Column(name = "last_active_date")
+    @Column
     private Instant lastActiveDate;
 
-    @Column(name = "active")
+    @Column
     private Boolean active;
 
-    @OneToMany(mappedBy = "detector")
+    @OneToMany(mappedBy = "detectorId")
     private Set<Notification> notifications = new LinkedHashSet<>();
 
     @ManyToMany(mappedBy = "subscribers")
     private Set<User> users = new LinkedHashSet<>();
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
-
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Instant getLastActiveDate() {
-        return lastActiveDate;
-    }
-
-    public void setLastActiveDate(Instant lastActiveDate) {
-        this.lastActiveDate = lastActiveDate;
-    }
-
-    public Instant getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Instant registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     public String getId() {
         return id;
@@ -124,5 +57,69 @@ public class Detector implements Serializable {
 
     public void setOwnerEmail(User ownerEmail) {
         this.ownerEmail = ownerEmail;
+    }
+
+    public Location getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Location locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Instant getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public Instant getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setLastActiveDate(Instant lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Set<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(Set<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

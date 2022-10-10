@@ -1,38 +1,34 @@
 package com.ardecs.smarthome.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table
 public class User implements Serializable {
-
     @Id
-    @Column(name = "id", nullable = false, length = 36)
+    @Column
     private String id;
 
-    @Column(name = "email", nullable = false)
+    @Column
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column
     private String password;
 
-    @Column(name = "fullname")
+    @Column
     private String fullname;
 
-    @Column(name = "registration_date", nullable = false)
+    @Column
     private Instant registrationDate;
 
-    @Column(name = "last_login_date")
+    @Column
     private Instant lastLoginDate;
 
-    @Column(name = "phone_number", nullable = false, length = 15)
+    @Column
     private String phoneNumber;
 
     @OneToMany(mappedBy = "ownerEmail")
@@ -44,60 +40,12 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "detector_id"))
     private Set<Detector> subscribers = new LinkedHashSet<>();
 
-    public Set<Detector> getSubscribers() {
-        return subscribers;
+    public String getId() {
+        return id;
     }
 
-    public void setSubscribers(Set<Detector> subscribers) {
-        this.subscribers = subscribers;
-    }
-
-    public Set<Detector> getOwnerEmail() {
-        return ownerEmail;
-    }
-
-    public void setOwnerEmail(Set<Detector> ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public Instant getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    public void setLastLoginDate(Instant lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
-    }
-
-    public Instant getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Instant registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public String getFullname() {
-        return fullname;
-    }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -108,11 +56,59 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public Instant getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public Instant getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Instant lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Set<Detector> getOwnerEmail() {
+        return ownerEmail;
+    }
+
+    public void setOwnerEmail(Set<Detector> ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
+    public Set<Detector> getSubscribers() {
+        return subscribers;
+    }
+
+    public void setSubscribers(Set<Detector> subscribers) {
+        this.subscribers = subscribers;
     }
 }

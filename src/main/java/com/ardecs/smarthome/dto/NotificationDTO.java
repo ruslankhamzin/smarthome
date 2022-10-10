@@ -1,18 +1,20 @@
 package com.ardecs.smarthome.dto;
 
+import com.ardecs.smarthome.model.Detector;
+
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import java.time.Instant;
 
 public class NotificationDTO implements Serializable {
-    private String detectorId;
+    private Detector detectorId;
     private String type;
-    private LocalDateTime date;
-    public String getDetectorId() {
+    private Instant date;
+
+    public Detector getDetectorId() {
         return detectorId;
     }
 
-    public void setDetectorId(String detectorId) {
+    public void setDetectorId(Detector detectorId) {
         this.detectorId = detectorId;
     }
 
@@ -24,20 +26,11 @@ public class NotificationDTO implements Serializable {
         this.type = type;
     }
 
-    public LocalDateTime getDate() {
+    public Instant getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Instant date) {
         this.date = date;
-    }
-
-    @Override
-    public String toString() {
-        return "NotificationDAO{" +
-                "detectorId='" + detectorId + '\'' +
-                ", type='" + type + '\'' +
-                ", date=" + date +
-                '}';
     }
 }

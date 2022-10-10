@@ -8,28 +8,37 @@ import java.io.Serializable;
 public class Subscriber implements Serializable {
 
     @Id
+    @Column
     private String id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "detector_id", nullable = false)
-    private Detector detector;
+    private Detector detectorId;
 
-    public Detector getDetector() {
-        return detector;
+    public String getId() {
+        return id;
     }
 
-    public void setDetector(Detector detector) {
-        this.detector = detector;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public Detector getDetectorId() {
+        return detectorId;
+    }
+
+    public void setDetectorId(Detector detectorId) {
+        this.detectorId = detectorId;
     }
 }

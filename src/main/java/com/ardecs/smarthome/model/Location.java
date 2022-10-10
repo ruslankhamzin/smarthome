@@ -1,9 +1,7 @@
 package com.ardecs.smarthome.model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -11,16 +9,16 @@ import java.util.Set;
 public class Location {
 
     @Id
-    @Column(name = "id", nullable = false, length = 36)
+    @Column
     private String id;
 
-    @Column(name = "name")
+    @Column
     private String name;
 
-    @Column(name = "square")
+    @Column
     private Integer square;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "locationId")
     private Set<Detector> detectors = new LinkedHashSet<>();
 
     public Set<Detector> getDetectors() {
@@ -31,12 +29,12 @@ public class Location {
         this.detectors = detectors;
     }
 
-    public Integer getSquare() {
-        return square;
+    public String getId() {
+        return id;
     }
 
-    public void setSquare(Integer square) {
-        this.square = square;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -47,11 +45,11 @@ public class Location {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public Integer getSquare() {
+        return square;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSquare(Integer square) {
+        this.square = square;
     }
 }

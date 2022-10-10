@@ -3,12 +3,7 @@ package com.ardecs.smarthome.dto;
 import com.ardecs.smarthome.model.Location;
 import com.ardecs.smarthome.model.User;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.Instant;
-import java.time.LocalDateTime;
 
 public class DetectorResponseDTO {
     private String id;
@@ -19,6 +14,7 @@ public class DetectorResponseDTO {
     private Instant registrationDate;
     private Instant lastActiveDate;
     private Boolean active;
+    private String message;
 
     public String getId() {
         return id;
@@ -26,14 +22,6 @@ public class DetectorResponseDTO {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public LocalDateTime getRegistration_date() {
-        return registration_date;
-    }
-
-    public void setRegistration_date(LocalDateTime registration_date) {
-        this.registration_date = registration_date;
     }
 
     public User getOwnerEmail() {
@@ -44,12 +32,12 @@ public class DetectorResponseDTO {
         this.ownerEmail = ownerEmail;
     }
 
-    public Location getLocationId() {
-        return locationId;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationId(Location locationId) {
-        this.locationId = locationId;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String getDescription() {
@@ -68,19 +56,27 @@ public class DetectorResponseDTO {
         this.name = name;
     }
 
-    public LocalDateTime getLast_active_date() {
-        return last_active_date;
+    public Instant getRegistrationDate() {
+        return registrationDate;
     }
 
-    public void setLast_active_date(LocalDateTime last_active_date) {
-        this.last_active_date = last_active_date;
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    public boolean isActive() {
+    public Instant getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setLastActiveDate(Instant lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
+    }
+
+    public Boolean getActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 
@@ -91,13 +87,4 @@ public class DetectorResponseDTO {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    private Location locationId;
-    private String description;
-    private String name;
-    private LocalDateTime last_active_date;
-    private boolean active;
-    private String message;
-
-
 }

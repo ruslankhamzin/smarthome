@@ -1,0 +1,7 @@
+package com.ardecs.smarthome.repository;
+
+import com.ardecs.smarthome.model.Notification;
+import org.springframework.data.repository.CrudRepository;
+
+public interface NotificationRepository extends CrudRepository<Notification, Long> {
+}

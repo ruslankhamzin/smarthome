@@ -12,6 +12,9 @@ public class DetectorDTO implements Serializable {
     private String description;
     private String name;
 
+    public User getOwnerEmail() {
+        return ownerEmail;
+    }
 
     public void setOwnerEmail(User ownerEmail) {
         this.ownerEmail = ownerEmail;
