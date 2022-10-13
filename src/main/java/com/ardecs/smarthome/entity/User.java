@@ -1,14 +1,24 @@
-package com.ardecs.smarthome.model;
+package com.ardecs.smarthome.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table
 public class User implements Serializable {
+
     @Id
     @Column
     private String id;
@@ -38,7 +48,7 @@ public class User implements Serializable {
     @JoinTable(name = "subscriber",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "detector_id"))
-    private Set<Detector> subscribers = new LinkedHashSet<>();
+    private List<Detector> subscribers = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -104,11 +114,11 @@ public class User implements Serializable {
         this.ownerEmail = ownerEmail;
     }
 
-    public Set<Detector> getSubscribers() {
+    public List<Detector> getSubscribers() {
         return subscribers;
     }
 
-    public void setSubscribers(Set<Detector> subscribers) {
+    public void setSubscribers(List<Detector> subscribers) {
         this.subscribers = subscribers;
     }
 }

@@ -1,8 +1,12 @@
-package com.ardecs.smarthome.model;
+package com.ardecs.smarthome.entity;
 
-import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -19,13 +23,13 @@ public class Location {
     private Integer square;
 
     @OneToMany(mappedBy = "location")
-    private Set<Detector> detectors = new LinkedHashSet<>();
+    private List<Detector> detectors = new ArrayList<>();
 
-    public Set<Detector> getDetectors() {
+    public List<Detector> getDetectors() {
         return detectors;
     }
 
-    public void setDetectors(Set<Detector> detectors) {
+    public void setDetectors(List<Detector> detectors) {
         this.detectors = detectors;
     }
 

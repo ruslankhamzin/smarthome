@@ -1,19 +1,28 @@
 package com.ardecs.smarthome.dto;
 
-import com.ardecs.smarthome.model.Location;
-import com.ardecs.smarthome.model.User;
+import com.ardecs.smarthome.entity.Location;
+import com.ardecs.smarthome.entity.User;
 
 import java.time.Instant;
 
 public class DetectorResponseDTO {
+
     private String id;
+
     private User ownerEmail;
+
     private Location location;
+
     private String description;
+
     private String name;
+
     private Instant registrationDate;
+
     private Instant lastActiveDate;
+
     private Boolean active;
+
     private String message;
 
     public String getId() {

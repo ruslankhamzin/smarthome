@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/subscriber")
 public class SubscriberController {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscriberController.class);
+
     @Autowired
     private SubscriberService subscriberService;
 

@@ -1,6 +1,11 @@
-package com.ardecs.smarthome.model;
+package com.ardecs.smarthome.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -11,12 +16,15 @@ public class Subscriber implements Serializable {
     @Column
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @Column
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User userId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "detector_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "detector_id")
     private Detector detectorId;
 
     public String getId() {

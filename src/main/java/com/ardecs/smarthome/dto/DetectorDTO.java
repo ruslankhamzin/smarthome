@@ -1,15 +1,18 @@
 package com.ardecs.smarthome.dto;
 
-
-import com.ardecs.smarthome.model.Location;
-import com.ardecs.smarthome.model.User;
+import com.ardecs.smarthome.entity.Location;
+import com.ardecs.smarthome.entity.User;
 
 import java.io.Serializable;
 
 public class DetectorDTO implements Serializable {
+
     private User ownerEmail;
+
     private Location location;
+
     private String description;
+
     private String name;
 
     public User getOwnerEmail() {
@@ -42,5 +45,15 @@ public class DetectorDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "DetectorDTO{" +
+                "ownerEmail=" + ownerEmail +
+                ", location=" + location +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -1,25 +1,33 @@
-package com.ardecs.smarthome.model;
+package com.ardecs.smarthome.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
 @Table
 public class Detector implements Serializable {
+
     @Id
-    @Column(name = "id", nullable = false)
+    @Column
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "owner_email")
     private User ownerEmail;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "location_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @Column
@@ -29,21 +37,19 @@ public class Detector implements Serializable {
     private String name;
 
     @Column
-    @Temporal(TemporalType.DATE)
     private Instant registrationDate;
 
     @Column
-    @Temporal(TemporalType.DATE)
     private Instant lastActiveDate;
 
     @Column
     private Boolean active;
 
     @OneToMany(mappedBy = "detectorId")
-    private Set<Notification> notifications = new LinkedHashSet<>();
+    private List<Notification> notifications = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subscribers")
-    private Set<User> users = new LinkedHashSet<>();
+    private List<User> users = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -109,19 +115,35 @@ public class Detector implements Serializable {
         this.active = active;
     }
 
-    public Set<Notification> getNotifications() {
+    public List<Notification> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(Set<Notification> notifications) {
+    public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Detector{" +
+                "id='" + id + '\'' +
+                ", ownerEmail=" + ownerEmail +
+                ", location=" + location +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", lastActiveDate=" + lastActiveDate +
+                ", active=" + active +
+                ", notifications=" + notifications +
+                ", users=" + users +
+                '}';
     }
 }

@@ -1,28 +1,32 @@
 package com.ardecs.smarthome.dto;
 
-import com.ardecs.smarthome.model.Detector;
+import com.ardecs.smarthome.entity.Detector;
+import com.ardecs.smarthome.enums.NotificationType;
 
 import java.io.Serializable;
 import java.time.Instant;
 
 public class NotificationDTO implements Serializable {
-    private Detector detector;
-    private String type;
+
+    private Detector detectorId;
+
+    private NotificationType type;
+
     private Instant date;
 
-    public Detector getDetector() {
-        return detector;
+    public Detector getDetectorId() {
+        return detectorId;
     }
 
-    public void setDetector(Detector detector) {
-        this.detector = detector;
+    public void setDetectorId(Detector detectorId) {
+        this.detectorId = detectorId;
     }
 
-    public String getType() {
+    public NotificationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(NotificationType type) {
         this.type = type;
     }
 

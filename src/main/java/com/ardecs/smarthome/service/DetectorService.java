@@ -2,8 +2,10 @@ package com.ardecs.smarthome.service;
 
 import com.ardecs.smarthome.dto.DetectorDTO;
 import com.ardecs.smarthome.dto.DetectorResponseDTO;
-import com.ardecs.smarthome.model.Detector;
+import com.ardecs.smarthome.dto.NotificationDTO;
+import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.repository.DetectorRepository;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,39 +16,46 @@ import java.util.UUID;
 
 @Service
 public class DetectorService {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectorService.class);
+
+    private static final ModelMapper MAPPER = new ModelMapper();
+
     @Autowired
     private DetectorRepository detectorRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     public DetectorResponseDTO create(DetectorDTO detectorDTO) {
-        Detector detector = new Detector();
-        detector.setId(String.valueOf(UUID.randomUUID()));
-        detector.setLastActiveDate(Instant.now());
-        detector.setName(detectorDTO.getName());
-        detector.setDescription(detectorDTO.getDescription());
-        detector.setLocation(detectorDTO.getLocationId());
-        detector.setOwnerEmail(detectorDTO.getOwnerEmail());
-        detector.setActive(true);
-        detector.setRegistrationDate(Instant.now());
+        Detector detector = mappedToDetector(detectorDTO);
         detectorRepository.save(detector);
-        return detectorToDetectorResponseDTO(detector);
+        LOGGER.info("detector has been saved with data: " + detector);
+        return mappedToDetectorResponseDTO(detector);
     }
 
-    public DetectorResponseDTO detectorToDetectorResponseDTO(Detector detector) {
-        DetectorResponseDTO detectorResponseDTO = new DetectorResponseDTO();
-        detectorResponseDTO.setId(detector.getId());
-        detectorResponseDTO.setActive(detector.getActive());
-        detectorResponseDTO.setDescription(detector.getDescription());
-        detectorResponseDTO.setName(detector.getName());
-        detectorResponseDTO.setLocation(detector.getLocation());
-        detectorResponseDTO.setOwnerEmail(detector.getOwnerEmail());
-        detectorResponseDTO.setLastActiveDate(detector.getLastActiveDate());
+    private Detector mappedToDetector(DetectorDTO detectorDTO) {
+        Detector detector = MAPPER.map(detectorDTO, Detector.class);
+        initDetector(detector);
+        return detector;
+    }
+
+    private Detector initDetector(Detector detector) {
+        detector.setId(String.valueOf(UUID.randomUUID()));
+        detector.setActive(true);
+        detector.setRegistrationDate(Instant.now());
+        detector.setLastActiveDate(Instant.now());
+        return detector;
+    }
+
+    private DetectorResponseDTO mappedToDetectorResponseDTO(Detector detector) {
+        DetectorResponseDTO detectorResponseDTO = MAPPER.map(detector, DetectorResponseDTO.class);
         detectorResponseDTO.setMessage("Detector successfully added");
         return detectorResponseDTO;
     }
 
-    public String findOwnerEmailById(String detectorId) {
-        String ownerEmail = detectorRepository.findById(detectorId).orElseThrow(() -> new IllegalArgumentException("Такого датчика не существует"));
-        return ownerEmail;
+    public String triggering(NotificationDTO notificationDTO) {
+        detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetectorId().getId(), Instant.now());
+        return notificationService.send(notificationDTO);
     }
 }
