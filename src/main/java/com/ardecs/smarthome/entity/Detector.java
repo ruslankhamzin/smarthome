@@ -2,7 +2,13 @@ package com.ardecs.smarthome.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -23,11 +29,9 @@ public class Detector implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_email")
     private User ownerEmail;
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
     private Location location;
-
     @OneToMany(mappedBy = "detectorId",cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
 

@@ -21,7 +21,7 @@ public class User implements Serializable {
     private Instant registrationDate;
     private Instant lastLoginDate;
     private String phoneNumber;
-    @OneToMany(mappedBy = "ownerEmail",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ownerEmail", cascade = CascadeType.ALL)
     private Set<Detector> ownerEmail = new LinkedHashSet<>();
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "subscriber",
