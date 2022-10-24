@@ -1,29 +1,25 @@
 package com.ardecs.smarthome.dto;
 
-import com.ardecs.smarthome.entity.Detector;
-import com.ardecs.smarthome.entity.User;
-
 import java.io.Serializable;
 
 public class SubscriberDTO implements Serializable {
+    private String detectorID;
 
-    private Detector detectorID;
+    private String ownerEmail;
 
-    private User ownerEmail;
-
-    public Detector getDetectorID() {
+    public String getDetectorID() {
         return detectorID;
     }
 
-    public void setDetectorID(Detector detectorID) {
+    public void setDetectorID(String detectorID) {
         this.detectorID = detectorID;
     }
 
-    public User getOwnerEmail() {
+    public String getOwnerEmail() {
         return ownerEmail;
     }
 
-    public void setOwnerEmail(User ownerEmail) {
+    public void setOwnerEmail(String ownerEmail) {
         this.ownerEmail = ownerEmail;
     }
 

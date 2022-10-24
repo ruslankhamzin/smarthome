@@ -23,14 +23,10 @@ public class SubscriberService {
         return "request has been sent";
     }
 
-    private Subscriber mappedToSubscriber(SubscriberDTO subscriberDTO){
+    private Subscriber mappedToSubscriber(SubscriberDTO subscriberDTO) {
         Subscriber subscriber = MAPPER.map(subscriberDTO, Subscriber.class);
-        initSubscriber(subscriber);
-        return subscriber;
-    }
-
-    private Subscriber initSubscriber(Subscriber subscriber) {
         subscriber.setId(String.valueOf(UUID.randomUUID()));
         return subscriber;
     }
+
 }

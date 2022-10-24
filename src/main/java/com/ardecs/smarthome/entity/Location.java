@@ -1,28 +1,20 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table
 public class Location {
-
     @Id
-    @Column
     private String id;
-
-    @Column
     private String name;
-
-    @Column
     private Integer square;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)
     private List<Detector> detectors = new ArrayList<>();
 
     public List<Detector> getDetectors() {

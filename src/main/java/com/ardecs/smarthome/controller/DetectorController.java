@@ -12,24 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping(value = "/detector")
 public class DetectorController {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectorController.class);
-
     @Autowired
     private DetectorService detectorService;
 
     @PostMapping("/create")
     public DetectorResponseDTO create(@RequestBody DetectorDTO detector) {
-        LOGGER.info("Request to save the detector with parameters: " + detector.toString());
+        LOGGER.info("Request to save the detector with parameters: " + detector);
         return detectorService.create(detector);
     }
 
-    @PostMapping("/triggering")
-    public String triggering(@RequestBody NotificationDTO notificationDTO) {
-        return detectorService.triggering(notificationDTO);
+    @PostMapping("/activation")
+    public String activation(@RequestBody NotificationDTO notificationDTO) {
+        LOGGER.info("the activation of the detector was accepted with the parameters: " + notificationDTO);
+        return detectorService.activate(notificationDTO);
     }
 }

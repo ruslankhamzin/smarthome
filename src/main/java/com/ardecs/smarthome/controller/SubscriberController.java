@@ -13,14 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/subscriber")
 public class SubscriberController {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscriberController.class);
-
     @Autowired
     private SubscriberService subscriberService;
 
     @PostMapping("/subscribe")
     public String subscribe(@RequestBody SubscriberDTO subscriberDTO) {
+        LOGGER.info("The subscription request was accepted with the parameters: " + subscriberDTO);
         return subscriberService.subscribe(subscriberDTO);
     }
 }

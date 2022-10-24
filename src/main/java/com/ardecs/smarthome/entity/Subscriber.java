@@ -1,28 +1,16 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table
 public class Subscriber implements Serializable {
-
     @Id
-    @Column
     private String id;
-
-    @Column
     private String status;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User userId;
-
     @ManyToOne
     @JoinColumn(name = "detector_id")
     private Detector detectorId;

@@ -1,13 +1,8 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,35 +11,19 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table
 public class User implements Serializable {
-
     @Id
-    @Column
     private String id;
-
-    @Column
     private String email;
-
-    @Column
     private String password;
-
-    @Column
     private String fullname;
-
-    @Column
+    @CreatedDate
     private Instant registrationDate;
-
-    @Column
     private Instant lastLoginDate;
-
-    @Column
     private String phoneNumber;
-
-    @OneToMany(mappedBy = "ownerEmail")
+    @OneToMany(mappedBy = "ownerEmail",cascade = CascadeType.ALL)
     private Set<Detector> ownerEmail = new LinkedHashSet<>();
-
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "subscriber",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "detector_id"))

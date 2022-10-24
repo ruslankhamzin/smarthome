@@ -16,14 +16,10 @@ import java.util.UUID;
 
 @Service
 public class DetectorService {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectorService.class);
-
     private static final ModelMapper MAPPER = new ModelMapper();
-
     @Autowired
     private DetectorRepository detectorRepository;
-
     @Autowired
     private NotificationService notificationService;
 
@@ -36,26 +32,25 @@ public class DetectorService {
 
     private Detector mappedToDetector(DetectorDTO detectorDTO) {
         Detector detector = MAPPER.map(detectorDTO, Detector.class);
-        initDetector(detector);
+        setDetectorFields(detector);
         return detector;
     }
 
-    private Detector initDetector(Detector detector) {
+    private void setDetectorFields(Detector detector) {
         detector.setId(String.valueOf(UUID.randomUUID()));
         detector.setActive(true);
         detector.setRegistrationDate(Instant.now());
         detector.setLastActiveDate(Instant.now());
-        return detector;
     }
 
     private DetectorResponseDTO mappedToDetectorResponseDTO(Detector detector) {
         DetectorResponseDTO detectorResponseDTO = MAPPER.map(detector, DetectorResponseDTO.class);
-        detectorResponseDTO.setMessage("Detector successfully added");
+        detectorResponseDTO.setMessage("the detector has been added");
         return detectorResponseDTO;
     }
 
-    public String triggering(NotificationDTO notificationDTO) {
-        detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetectorId().getId(), Instant.now());
+    public String activate(NotificationDTO notificationDTO) {
+        detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetectorId(), Instant.now());
         return notificationService.send(notificationDTO);
     }
 }

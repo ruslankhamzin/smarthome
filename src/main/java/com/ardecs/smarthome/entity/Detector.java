@@ -1,54 +1,37 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
-@Table
 public class Detector implements Serializable {
-
     @Id
-    @Column
     private String id;
+    private String description;
+    private String name;
+    private Instant lastActiveDate;
+    private Boolean active;
 
-    @ManyToOne
+    @CreatedDate
+    private Instant registrationDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_email")
     private User ownerEmail;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
     private Location location;
 
-    @Column
-    private String description;
-
-    @Column
-    private String name;
-
-    @Column
-    private Instant registrationDate;
-
-    @Column
-    private Instant lastActiveDate;
-
-    @Column
-    private Boolean active;
-
-    @OneToMany(mappedBy = "detectorId")
+    @OneToMany(mappedBy = "detectorId",cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "subscribers")
+    @ManyToMany(mappedBy = "subscribers",cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
 
     public String getId() {

@@ -1,26 +1,19 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
-@Table
 public class Notification implements Serializable {
-
     @Id
-    @Column
     private String id;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "detector_id")
     private Detector detectorId;
-
-    @Column
     private String type;
 
     public String getId() {

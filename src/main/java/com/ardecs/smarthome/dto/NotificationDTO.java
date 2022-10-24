@@ -1,6 +1,5 @@
 package com.ardecs.smarthome.dto;
 
-import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.enums.NotificationType;
 
 import java.io.Serializable;
@@ -8,17 +7,17 @@ import java.time.Instant;
 
 public class NotificationDTO implements Serializable {
 
-    private Detector detectorId;
+    private String detectorId;
 
     private NotificationType type;
 
     private Instant date;
 
-    public Detector getDetectorId() {
+    public String getDetectorId() {
         return detectorId;
     }
 
-    public void setDetectorId(Detector detectorId) {
+    public void setDetectorId(String detectorId) {
         this.detectorId = detectorId;
     }
 
@@ -36,5 +35,14 @@ public class NotificationDTO implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "NotificationDTO{" +
+                "detectorId='" + detectorId + '\'' +
+                ", type=" + type +
+                ", date=" + date +
+                '}';
     }
 }
