@@ -1,5 +1,7 @@
 package com.ardecs.smarthome.entity;
 
+import com.ardecs.smarthome.strategy.NotificationType;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,8 +15,16 @@ public class Notification implements Serializable {
     private String id;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "detector_id")
-    private Detector detectorId;
-    private String type;
+    private Detector detector;
+    private NotificationType type;
+
+    public Detector getDetector() {
+        return detector;
+    }
+
+    public void setDetector(Detector detector) {
+        this.detector = detector;
+    }
 
     public String getId() {
         return id;
@@ -24,19 +34,11 @@ public class Notification implements Serializable {
         this.id = id;
     }
 
-    public Detector getDetectorId() {
-        return detectorId;
-    }
-
-    public void setDetectorId(Detector detectorId) {
-        this.detectorId = detectorId;
-    }
-
-    public String getType() {
+    public NotificationType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(NotificationType type) {
         this.type = type;
     }
 }

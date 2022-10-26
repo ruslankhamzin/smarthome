@@ -1,4 +1,4 @@
-package com.ardecs.smarthome.enums;
+package com.ardecs.smarthome.strategy;
 
 public enum NotificationType {
     EMAIL, WEB

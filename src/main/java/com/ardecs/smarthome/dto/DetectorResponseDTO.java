@@ -1,14 +1,17 @@
 package com.ardecs.smarthome.dto;
 
+import com.ardecs.smarthome.entity.Location;
+import com.ardecs.smarthome.entity.User;
+
 import java.time.Instant;
 
 public class DetectorResponseDTO {
 
     private String id;
 
-    private String ownerEmail;
+    private User owner;
 
-    private String location;
+    private Location location;
 
     private String description;
 
@@ -30,19 +33,19 @@ public class DetectorResponseDTO {
         this.id = id;
     }
 
-    public String getOwnerEmail() {
-        return ownerEmail;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerEmail(String ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

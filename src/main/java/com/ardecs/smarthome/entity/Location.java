@@ -14,7 +14,7 @@ public class Location {
     private String name;
     private Integer square;
 
-    @OneToMany(mappedBy = "location",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Detector> detectors = new ArrayList<>();
 
     public List<Detector> getDetectors() {

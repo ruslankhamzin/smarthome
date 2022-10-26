@@ -24,14 +24,16 @@ public class DetectorService {
     private NotificationService notificationService;
 
     public DetectorResponseDTO create(DetectorDTO detectorDTO) {
-        Detector detector = mappedToDetector(detectorDTO);
+        Detector detector = mapToDetector(detectorDTO);
         detectorRepository.save(detector);
         LOGGER.info("detector has been saved with data: " + detector);
-        return mappedToDetectorResponseDTO(detector);
+        return mapToDetectorResponseDTO(detector);
     }
 
-    private Detector mappedToDetector(DetectorDTO detectorDTO) {
+    private Detector mapToDetector(DetectorDTO detectorDTO) {
         Detector detector = MAPPER.map(detectorDTO, Detector.class);
+        detector.setOwner(detectorDTO.getUser());
+        detector.setLocation(detectorDTO.getLocation());
         setDetectorFields(detector);
         return detector;
     }
@@ -43,14 +45,14 @@ public class DetectorService {
         detector.setLastActiveDate(Instant.now());
     }
 
-    private DetectorResponseDTO mappedToDetectorResponseDTO(Detector detector) {
+    private DetectorResponseDTO mapToDetectorResponseDTO(Detector detector) {
         DetectorResponseDTO detectorResponseDTO = MAPPER.map(detector, DetectorResponseDTO.class);
         detectorResponseDTO.setMessage("the detector has been added");
         return detectorResponseDTO;
     }
 
     public String activate(NotificationDTO notificationDTO) {
-        detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetectorId(), Instant.now());
+        detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetector().getId(), Instant.now());
         return notificationService.send(notificationDTO);
     }
 }

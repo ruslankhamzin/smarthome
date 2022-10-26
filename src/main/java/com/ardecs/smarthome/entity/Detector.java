@@ -22,21 +22,30 @@ public class Detector implements Serializable {
     private String name;
     private Instant lastActiveDate;
     private Boolean active;
-
     @CreatedDate
     private Instant registrationDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_email")
-    private User ownerEmail;
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id")
     private Location location;
-    @OneToMany(mappedBy = "detectorId",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "detector",cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
 
     @ManyToMany(mappedBy = "subscribers",cascade = CascadeType.ALL)
     private List<User> users = new ArrayList<>();
+
+    public  Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 
     public String getId() {
         return id;
@@ -46,20 +55,12 @@ public class Detector implements Serializable {
         this.id = id;
     }
 
-    public User getOwnerEmail() {
-        return ownerEmail;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setOwnerEmail(User ownerEmail) {
-        this.ownerEmail = ownerEmail;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public String getDescription() {
@@ -122,7 +123,7 @@ public class Detector implements Serializable {
     public String toString() {
         return "Detector{" +
                 "id='" + id + '\'' +
-                ", ownerEmail=" + ownerEmail +
+                ", ownerEmail=" + owner +
                 ", location=" + location +
                 ", description='" + description + '\'' +
                 ", name='" + name + '\'' +

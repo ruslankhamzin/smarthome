@@ -11,21 +11,20 @@ import java.util.UUID;
 
 @Service
 public class SubscriberService {
-
     private static final ModelMapper MAPPER = new ModelMapper();
-
     @Autowired
     private SubscriberRepository subscriberRepository;
 
     public String subscribe(SubscriberDTO subscriberDTO) {
-        Subscriber subscriber = mappedToSubscriber(subscriberDTO);
+        Subscriber subscriber = mapToSubscriber(subscriberDTO);
         subscriberRepository.save(subscriber);
         return "request has been sent";
     }
 
-    private Subscriber mappedToSubscriber(SubscriberDTO subscriberDTO) {
+    private Subscriber mapToSubscriber(SubscriberDTO subscriberDTO) {
         Subscriber subscriber = MAPPER.map(subscriberDTO, Subscriber.class);
         subscriber.setId(String.valueOf(UUID.randomUUID()));
+        subscriber.setStatus("waiting");
         return subscriber;
     }
 

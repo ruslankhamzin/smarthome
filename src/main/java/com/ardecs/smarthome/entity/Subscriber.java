@@ -1,6 +1,10 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Entity
@@ -10,10 +14,10 @@ public class Subscriber implements Serializable {
     private String status;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private User userId;
+    private User owner;
     @ManyToOne
     @JoinColumn(name = "detector_id")
-    private Detector detectorId;
+    private Detector detector;
 
     public String getId() {
         return id;
@@ -23,19 +27,27 @@ public class Subscriber implements Serializable {
         this.id = id;
     }
 
-    public User getUserId() {
-        return userId;
+    public String getStatus() {
+        return status;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public Detector getDetectorId() {
-        return detectorId;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setDetectorId(Detector detectorId) {
-        this.detectorId = detectorId;
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Detector getDetector() {
+        return detector;
+    }
+
+    public void setDetector(Detector detector) {
+        this.detector = detector;
     }
 }

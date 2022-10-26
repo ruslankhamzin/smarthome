@@ -2,7 +2,13 @@ package com.ardecs.smarthome.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -16,13 +22,13 @@ public class User implements Serializable {
     private String id;
     private String email;
     private String password;
-    private String fullname;
+    private String fullName;
     @CreatedDate
     private Instant registrationDate;
     private Instant lastLoginDate;
     private String phoneNumber;
-    @OneToMany(mappedBy = "ownerEmail", cascade = CascadeType.ALL)
-    private Set<Detector> ownerEmail = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private Set<Detector> user = new LinkedHashSet<>();
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "subscriber",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -53,12 +59,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public Instant getRegistrationDate() {
@@ -85,12 +91,12 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<Detector> getOwnerEmail() {
-        return ownerEmail;
+    public Set<Detector> getUser() {
+        return user;
     }
 
-    public void setOwnerEmail(Set<Detector> ownerEmail) {
-        this.ownerEmail = ownerEmail;
+    public void setUser(Set<Detector> user) {
+        this.user = user;
     }
 
     public List<Detector> getSubscribers() {

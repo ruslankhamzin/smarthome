@@ -5,9 +5,11 @@ import com.ardecs.smarthome.repository.SubscriberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component("EMAIL")
 public class EmailNotificationStrategy implements NotificationStrategy {
     @Autowired
     private SubscriberRepository subscriberRepository;
@@ -16,9 +18,9 @@ public class EmailNotificationStrategy implements NotificationStrategy {
 
     @Override
     public String send(NotificationDTO notificationDTO) {
-        List<String> usersEmails = getSubscribers(notificationDTO.getDetectorId());
+        List<String> usersEmails = getSubscribers(notificationDTO.getDetector().getId());
         for (String userEmail : usersEmails) {
-            mailSender.send(createEmailMessage(notificationDTO, userEmail));
+             mailSender.send(createEmailMessage(notificationDTO, userEmail));
         }
         return "notification has been sent";
     }

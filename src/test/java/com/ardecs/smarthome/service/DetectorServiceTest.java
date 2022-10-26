@@ -2,16 +2,12 @@ package com.ardecs.smarthome.service;
 
 import com.ardecs.smarthome.dto.DetectorDTO;
 import com.ardecs.smarthome.dto.DetectorResponseDTO;
-import com.ardecs.smarthome.dto.NotificationDTO;
 import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.entity.Location;
-import com.ardecs.smarthome.entity.Subscriber;
 import com.ardecs.smarthome.entity.User;
 import com.ardecs.smarthome.repository.DetectorRepository;
 import com.ardecs.smarthome.repository.LocationRepository;
-import com.ardecs.smarthome.repository.SubscriberRepository;
 import com.ardecs.smarthome.repository.UserRepository;
-import com.ardecs.smarthome.strategy.NotificationType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,24 +15,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.Instant;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class NotificationServiceTest {
-    @Autowired
-    NotificationService notificationService;
-    @Autowired
-    LocationRepository locationRepository;
+class DetectorServiceTest {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    LocationRepository locationRepository;
     @Autowired
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;
-    @Autowired
-    SubscriberRepository subscriberRepository;
+
     @Test
-    void send() {
+    void create() {
         User user = new User();
         user.setId("80145217-81ab-4092-9984-a1fd5094dddf");
         user.setEmail("ruslan1111@mail.ru");
@@ -55,16 +48,10 @@ class NotificationServiceTest {
         detectorDTO.setLocation(location);
         DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);
         Detector detector = detectorRepository.findById(detectorResponseDTO.getId()).get();
-        Subscriber subscriber = new Subscriber();
-        subscriber.setId(String.valueOf(UUID.randomUUID()));
-        subscriber.setDetector(detector);
-        subscriber.setOwner(user);
-        subscriberRepository.save(subscriber);
-       NotificationDTO notificationDTO = new NotificationDTO();
-       notificationDTO.setDate(Instant.now());
-       notificationDTO.setDetector(detector);
-       notificationDTO.setType(NotificationType.WEB);
-       String response = notificationService.send(notificationDTO);
-        assertEquals("notification has been sent",response);
+        assertEquals(detectorResponseDTO.getName(),detector.getName());
+        assertEquals(detectorResponseDTO.getId(),detector.getId());
+        assertEquals(detectorResponseDTO.getActive(),detector.getActive());
+        assertEquals(detectorResponseDTO.getDescription(),detector.getDescription());
+        assertEquals(detectorResponseDTO.getLastActiveDate(),detector.getLastActiveDate());
     }
 }
