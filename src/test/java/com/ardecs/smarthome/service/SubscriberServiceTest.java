@@ -47,7 +47,7 @@ class SubscriberServiceTest {
         location.setSquare(33);
         location.setName("kitchen");
         DetectorDTO detectorDTO = new DetectorDTO();
-        detectorDTO.setUser(user);
+        detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
         DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);

@@ -32,8 +32,6 @@ public class DetectorService {
 
     private Detector mapToDetector(DetectorDTO detectorDTO) {
         Detector detector = MAPPER.map(detectorDTO, Detector.class);
-        detector.setOwner(detectorDTO.getUser());
-        detector.setLocation(detectorDTO.getLocation());
         setDetectorFields(detector);
         return detector;
     }
@@ -48,6 +46,7 @@ public class DetectorService {
     private DetectorResponseDTO mapToDetectorResponseDTO(Detector detector) {
         DetectorResponseDTO detectorResponseDTO = MAPPER.map(detector, DetectorResponseDTO.class);
         detectorResponseDTO.setMessage("the detector has been added");
+        LOGGER.info("response with data: " + detectorResponseDTO);
         return detectorResponseDTO;
     }
 

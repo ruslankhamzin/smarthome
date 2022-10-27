@@ -40,10 +40,8 @@ class DetectorServiceTest {
         user.setLastLoginDate(Instant.now());
         Location location = new Location();
         location.setId("d8f008a3-8864-4283-a202-d8464daab345");
-        location.setSquare(33);
-        location.setName("kitchen");
         DetectorDTO detectorDTO = new DetectorDTO();
-        detectorDTO.setUser(user);
+        detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
         DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);

@@ -24,4 +24,5 @@ public class SubscriberDTO implements Serializable {
     public void setOwner(User owner) {
         this.owner = owner;
     }
+
 }

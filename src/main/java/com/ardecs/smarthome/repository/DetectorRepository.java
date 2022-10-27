@@ -11,7 +11,6 @@ import java.time.Instant;
 public interface DetectorRepository extends CrudRepository<Detector, String> {
     @Transactional
     @Modifying
-    @Query(value = "UPDATE detector SET last_active_date = ?2 WHERE id=?1 ",
-            nativeQuery = true)
+    @Query("UPDATE Detector SET last_active_date = ?2 WHERE id=?1")
     void updateLastActiveDateForDetector(String id, Instant instant);
 }

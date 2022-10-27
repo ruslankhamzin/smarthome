@@ -22,7 +22,7 @@ public class EmailNotificationStrategy implements NotificationStrategy {
         for (String userEmail : usersEmails) {
              mailSender.send(createEmailMessage(notificationDTO, userEmail));
         }
-        return "notification has been sent";
+        return "email notification has been sent";
     }
 
     private SimpleMailMessage createEmailMessage(NotificationDTO notificationDTO, String email) {

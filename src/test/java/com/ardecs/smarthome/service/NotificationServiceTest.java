@@ -50,7 +50,7 @@ class NotificationServiceTest {
         location.setSquare(33);
         location.setName("kitchen");
         DetectorDTO detectorDTO = new DetectorDTO();
-        detectorDTO.setUser(user);
+        detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
         DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);
@@ -65,6 +65,9 @@ class NotificationServiceTest {
        notificationDTO.setDetector(detector);
        notificationDTO.setType(NotificationType.WEB);
        String response = notificationService.send(notificationDTO);
-        assertEquals("notification has been sent",response);
+        assertEquals("web notification has been sent",response);
+        notificationDTO.setType(NotificationType.EMAIL);
+        response = notificationService.send(notificationDTO);
+        assertEquals("email notification has been sent", response);
     }
 }

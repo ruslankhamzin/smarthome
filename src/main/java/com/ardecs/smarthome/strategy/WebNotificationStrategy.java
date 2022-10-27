@@ -11,7 +11,7 @@ public class WebNotificationStrategy implements NotificationStrategy {
     }
 
     private String sendMessage(NotificationDTO notificationDTO) {
-        return "notification has been sent";
+        return "web notification has been sent";
     }
 
     private String createMessage(NotificationDTO notificationDTO) {

@@ -96,4 +96,19 @@ public class DetectorResponseDTO {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    @Override
+    public String toString() {
+        return "DetectorResponseDTO{" +
+                "id='" + id + '\'' +
+                ", owner=" + owner +
+                ", location=" + location +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", lastActiveDate=" + lastActiveDate +
+                ", active=" + active +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

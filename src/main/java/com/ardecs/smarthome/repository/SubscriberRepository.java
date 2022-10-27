@@ -7,7 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface SubscriberRepository extends CrudRepository<Subscriber, String> {
-    @Query(value = "SELECT email FROM user INNER JOIN subscriber ON user.id = user_id WHERE detector_id = ?1",
-            nativeQuery = true)
+    @Query("SELECT u.email FROM User u, Subscriber s  WHERE u.id=s.owner and detector_id = ?1")
     List<String> getSubscribersEmail(String id);
 }

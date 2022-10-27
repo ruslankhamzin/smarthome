@@ -15,12 +15,12 @@ public class DetectorDTO implements Serializable {
 
     private String name;
 
-    public User getUser() {
+    public User getOwner() {
         return owner;
     }
 
-    public void setUser(User user) {
-        this.owner = user;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     public Location getLocation() {
