@@ -1,7 +1,7 @@
 package com.ardecs.smarthome.controller;
 
 import com.ardecs.smarthome.dto.SubscriberDTO;
-import com.ardecs.smarthome.service.SubscriberService;
+import com.ardecs.smarthome.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class SubscriberController {
     private static final Logger LOGGER = LoggerFactory.getLogger(SubscriberController.class);
     @Autowired
-    private SubscriberService subscriberService;
+    private UserService userService;
 
     @PostMapping("/subscribe")
     public String subscribe(@RequestBody SubscriberDTO subscriberDTO) {
         LOGGER.info("The subscription request was accepted with the parameters: " + subscriberDTO);
-        return subscriberService.subscribe(subscriberDTO);
+        return userService.subscribe(subscriberDTO);
     }
 }

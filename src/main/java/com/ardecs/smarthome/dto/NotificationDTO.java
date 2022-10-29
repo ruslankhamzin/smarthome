@@ -40,10 +40,10 @@ public class NotificationDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "NotificationDTO{" +
-                "detectorId='" + detector + '\'' +
-                ", type=" + type +
-                ", date=" + date +
-                '}';
+        return "NotificationDTO{"
+                + "detectorId='" + detector + '\''
+                + ", type=" + type
+                + ", date=" + date
+                + '}';
     }
 }

@@ -2,8 +2,8 @@ package com.ardecs.smarthome.entity;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -18,90 +18,31 @@ import java.util.List;
 public class Detector implements Serializable {
     @Id
     private String id;
+
     private String description;
+
     private String name;
+
     private Instant lastActiveDate;
+
     private Boolean active;
+
     @CreatedDate
     private Instant registrationDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "owner_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "location_id")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    @OneToMany(mappedBy = "detector",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "detector")
     private List<Notification> notifications = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "subscribers",cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "detectorSubscribers")
     private List<User> users = new ArrayList<>();
-
-    public  Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Instant getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setRegistrationDate(Instant registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
-    public Instant getLastActiveDate() {
-        return lastActiveDate;
-    }
-
-    public void setLastActiveDate(Instant lastActiveDate) {
-        this.lastActiveDate = lastActiveDate;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
 
     public List<Notification> getNotifications() {
         return notifications;
@@ -119,19 +60,68 @@ public class Detector implements Serializable {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "Detector{" +
-                "id='" + id + '\'' +
-                ", ownerEmail=" + owner +
-                ", location=" + location +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                ", registrationDate=" + registrationDate +
-                ", lastActiveDate=" + lastActiveDate +
-                ", active=" + active +
-                ", notifications=" + notifications +
-                ", users=" + users +
-                '}';
+    public Boolean getActive() {
+        return active;
     }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public Instant getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setLastActiveDate(Instant lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
+    }
+
+    public Instant getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Instant registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 }

@@ -27,7 +27,7 @@ public class DetectorController {
 
     @PostMapping("/activate")
     public String activate(@RequestBody NotificationDTO notificationDTO) {
-        LOGGER.info("the activation of the detector was accepted with the parameters: " + notificationDTO);
+        LOGGER.info("The activation of the detector was accepted with the parameters: " + notificationDTO);
         return detectorService.activate(notificationDTO);
     }
 }

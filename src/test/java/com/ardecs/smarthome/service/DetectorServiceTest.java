@@ -20,10 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class DetectorServiceTest {
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    LocationRepository locationRepository;
-    @Autowired
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;
@@ -33,7 +29,7 @@ class DetectorServiceTest {
         User user = new User();
         user.setId("80145217-81ab-4092-9984-a1fd5094dddf");
         user.setEmail("ruslan1111@mail.ru");
-        user.setFullName("RUSLAN1");
+        user.setFullname("RUSLAN1");
         user.setPhoneNumber("89634561");
         user.setPassword("qwerty1");
         user.setRegistrationDate(Instant.now());

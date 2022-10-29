@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -50,6 +51,7 @@ public class DetectorService {
         return detectorResponseDTO;
     }
 
+    @Transactional
     public String activate(NotificationDTO notificationDTO) {
         detectorRepository.updateLastActiveDateForDetector(notificationDTO.getDetector().getId(), Instant.now());
         return notificationService.send(notificationDTO);

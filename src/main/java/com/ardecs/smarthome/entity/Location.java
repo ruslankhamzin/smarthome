@@ -1,6 +1,5 @@
 package com.ardecs.smarthome.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,10 +10,12 @@ import java.util.List;
 public class Location {
     @Id
     private String id;
+
     private String name;
+
     private Integer square;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location")
     private List<Detector> detectors = new ArrayList<>();
 
     public List<Detector> getDetectors() {
@@ -25,12 +26,12 @@ public class Location {
         this.detectors = detectors;
     }
 
-    public String getId() {
-        return id;
+    public Integer getSquare() {
+        return square;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSquare(Integer square) {
+        this.square = square;
     }
 
     public String getName() {
@@ -41,11 +42,12 @@ public class Location {
         this.name = name;
     }
 
-    public Integer getSquare() {
-        return square;
+    public String getId() {
+        return id;
     }
 
-    public void setSquare(Integer square) {
-        this.square = square;
+    public void setId(String id) {
+        this.id = id;
     }
+
 }

@@ -99,16 +99,16 @@ public class DetectorResponseDTO {
 
     @Override
     public String toString() {
-        return "DetectorResponseDTO{" +
-                "id='" + id + '\'' +
-                ", owner=" + owner +
-                ", location=" + location +
-                ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
-                ", registrationDate=" + registrationDate +
-                ", lastActiveDate=" + lastActiveDate +
-                ", active=" + active +
-                ", message='" + message + '\'' +
-                '}';
+        return "DetectorResponseDTO{"
+                + "id='" + id + '\''
+                + ", owner=" + owner
+                + ", location=" + location
+                + ", description='" + description + '\''
+                + ", name='" + name + '\''
+                + ", registrationDate=" + registrationDate
+                + ", lastActiveDate=" + lastActiveDate
+                + ", active=" + active
+                + ", message='" + message + '\''
+                + '}';
     }
 }

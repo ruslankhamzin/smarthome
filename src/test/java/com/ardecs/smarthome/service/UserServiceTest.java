@@ -2,50 +2,51 @@ package com.ardecs.smarthome.service;
 
 import com.ardecs.smarthome.dto.DetectorDTO;
 import com.ardecs.smarthome.dto.DetectorResponseDTO;
-import com.ardecs.smarthome.dto.NotificationDTO;
 import com.ardecs.smarthome.dto.SubscriberDTO;
 import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.entity.Location;
-import com.ardecs.smarthome.entity.Subscriber;
 import com.ardecs.smarthome.entity.User;
 import com.ardecs.smarthome.repository.DetectorRepository;
 import com.ardecs.smarthome.repository.LocationRepository;
-import com.ardecs.smarthome.repository.SubscriberRepository;
 import com.ardecs.smarthome.repository.UserRepository;
-import com.ardecs.smarthome.strategy.NotificationType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Instant;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class SubscriberServiceTest {
+class UserServiceTest {
     @Autowired
-    SubscriberService subscriberService;
+    UserService userService;
     @Autowired
     NotificationService notificationService;
     @Autowired
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    LocationRepository locationRepository;
     @Test
     void subscribe() {
         User user = new User();
         user.setId("80145217-81ab-4092-9984-a1fd5094dddf");
         user.setEmail("ruslan1111@mail.ru");
-        user.setFullName("RUSLAN1");
+        user.setFullname("RUSLAN1");
         user.setPhoneNumber("89634561");
         user.setPassword("qwerty1");
         user.setRegistrationDate(Instant.now());
         user.setLastLoginDate(Instant.now());
+        userRepository.save(user);
         Location location = new Location();
         location.setId("d8f008a3-8864-4283-a202-d8464daab345");
         location.setSquare(33);
         location.setName("kitchen");
+        locationRepository.save(location);
         DetectorDTO detectorDTO = new DetectorDTO();
         detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
@@ -55,7 +56,7 @@ class SubscriberServiceTest {
         SubscriberDTO subscriberDTO = new SubscriberDTO();
         subscriberDTO.setDetector(detector);
         subscriberDTO.setOwner(user);
-        String response = subscriberService.subscribe(subscriberDTO);
-        assertEquals("request has been sent",response);
+        String response = userService.subscribe(subscriberDTO);
+        assertEquals("email notification about subscribe request has been sent",response);
     }
 }
