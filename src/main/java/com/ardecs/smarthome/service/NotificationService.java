@@ -2,7 +2,6 @@ package com.ardecs.smarthome.service;
 
 import com.ardecs.smarthome.dto.NotificationDTO;
 import com.ardecs.smarthome.entity.Notification;
-import com.ardecs.smarthome.repository.DetectorRepository;
 import com.ardecs.smarthome.repository.NotificationRepository;
 import com.ardecs.smarthome.repository.UserRepository;
 import com.ardecs.smarthome.strategy.NotificationStrategy;
@@ -31,13 +30,12 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
         this.userRepository = userRepository;
         notificationStrategyMap = new HashMap<>();
-        notificationStrategyList.stream().forEach(notificationStrategy -> notificationStrategyMap.put(notificationStrategy.getType(),notificationStrategy));
+        notificationStrategyList.stream()
+                .forEach(notificationStrategy -> notificationStrategyMap.put(notificationStrategy.getType(), notificationStrategy));
     }
 
-
     public String send(NotificationDTO notificationDTO) {
-       NotificationType notificationType  = notificationDTO.getType();
-       NotificationStrategy notificationStrategy = notificationStrategyMap.get(notificationType);
+       NotificationStrategy notificationStrategy = notificationStrategyMap.get(notificationDTO.getType());
        Notification notification = notificationRepository.save(mapToNotification(notificationDTO));
        LOGGER.info("Notification with data: " + notification + " has been saved.");
        return notificationStrategy.sendActivationMessage(notificationDTO, userRepository.getSubscribers(notificationDTO.getDetector().getId()));

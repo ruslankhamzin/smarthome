@@ -27,7 +27,7 @@ public class DetectorService {
     public DetectorResponseDTO create(DetectorDTO detectorDTO) {
         Detector detector = mapToDetector(detectorDTO);
         detectorRepository.save(detector);
-        LOGGER.info("detector has been saved with data: " + detector);
+        LOGGER.info("Detector has been saved with data: " + detector);
         return mapToDetectorResponseDTO(detector);
     }
 
@@ -46,8 +46,8 @@ public class DetectorService {
 
     private DetectorResponseDTO mapToDetectorResponseDTO(Detector detector) {
         DetectorResponseDTO detectorResponseDTO = MAPPER.map(detector, DetectorResponseDTO.class);
-        detectorResponseDTO.setMessage("the detector has been added");
-        LOGGER.info("response with data: " + detectorResponseDTO);
+        detectorResponseDTO.setMessage("The detector has been added");
+        LOGGER.info("Response with data: " + detectorResponseDTO);
         return detectorResponseDTO;
     }
 

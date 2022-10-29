@@ -6,14 +6,11 @@ import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.entity.Location;
 import com.ardecs.smarthome.entity.User;
 import com.ardecs.smarthome.repository.DetectorRepository;
-import com.ardecs.smarthome.repository.LocationRepository;
-import com.ardecs.smarthome.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Instant;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 

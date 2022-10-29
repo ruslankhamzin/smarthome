@@ -7,8 +7,6 @@ import com.ardecs.smarthome.entity.Detector;
 import com.ardecs.smarthome.entity.Location;
 import com.ardecs.smarthome.entity.User;
 import com.ardecs.smarthome.repository.DetectorRepository;
-import com.ardecs.smarthome.repository.LocationRepository;
-import com.ardecs.smarthome.repository.UserRepository;
 import com.ardecs.smarthome.strategy.NotificationType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -6,6 +6,8 @@ import com.ardecs.smarthome.entity.User;
 import java.util.List;
 
 public interface NotificationStrategy {
+
     String sendActivationMessage(NotificationDTO notificationDTO, List<User> subscribers);
+
     NotificationType getType();
 }
