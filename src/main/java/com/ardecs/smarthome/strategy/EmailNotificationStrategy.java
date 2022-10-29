@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("EMAIL")
+@Component
 public class EmailNotificationStrategy implements NotificationStrategy {
     @Autowired
     private UserRepository subscriberRepository;

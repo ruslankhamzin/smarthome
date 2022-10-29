@@ -24,10 +24,6 @@ class NotificationServiceTest {
     @Autowired
     NotificationService notificationService;
     @Autowired
-    LocationRepository locationRepository;
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;
@@ -56,9 +52,9 @@ class NotificationServiceTest {
        notificationDTO.setDetector(detector);
        notificationDTO.setType(NotificationType.WEB);
        String response = notificationService.send(notificationDTO);
-      // assertEquals("web notification has been sent",response);
+        assertEquals("Detector: " + notificationDTO.getDetector().getId() + " was activated in: " + notificationDTO.getDate(),response);
         notificationDTO.setType(NotificationType.EMAIL);
-         response = notificationService.send(notificationDTO);
+        response = notificationService.send(notificationDTO);
         assertEquals("email notification has been sent", response);
     }
 }

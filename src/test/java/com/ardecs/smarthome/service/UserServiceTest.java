@@ -22,8 +22,6 @@ class UserServiceTest {
     @Autowired
     UserService userService;
     @Autowired
-    NotificationService notificationService;
-    @Autowired
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;

@@ -10,7 +10,7 @@ import java.util.List;
 Этот класс не был реализован в полной мере
  */
 
-@Component("WEB")
+@Component
 public class WebNotificationStrategy implements NotificationStrategy {
 
     @Override
@@ -19,7 +19,7 @@ public class WebNotificationStrategy implements NotificationStrategy {
     }
 
     private String createMessage(NotificationDTO notificationDTO) {
-        return "Detector: " + notificationDTO.getDetector().getId() + " сработал в: " + notificationDTO.getDate();
+        return "Detector: " + notificationDTO.getDetector().getId() + " was activated in: " + notificationDTO.getDate();
     }
 
     @Override
