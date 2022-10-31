@@ -10,9 +10,7 @@ import java.util.List;
 public class Location {
     @Id
     private String id;
-
     private String name;
-
     private Integer square;
 
     @OneToMany(mappedBy = "location")
@@ -49,5 +47,4 @@ public class Location {
     public void setId(String id) {
         this.id = id;
     }
-
 }

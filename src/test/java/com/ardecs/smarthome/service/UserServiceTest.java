@@ -29,6 +29,7 @@ class UserServiceTest {
     UserRepository userRepository;
     @Autowired
     LocationRepository locationRepository;
+
     @Test
     void subscribe() {
         User user = new User();
@@ -40,21 +41,26 @@ class UserServiceTest {
         user.setRegistrationDate(Instant.now());
         user.setLastLoginDate(Instant.now());
         userRepository.save(user);
+
         Location location = new Location();
         location.setId("d8f008a3-8864-4283-a202-d8464daab345");
         location.setSquare(33);
         location.setName("kitchen");
         locationRepository.save(location);
+
         DetectorDTO detectorDTO = new DetectorDTO();
         detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
-        DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);
+
+        DetectorResponseDTO detectorResponseDTO = detectorService.create(detectorDTO);
         Detector detector = detectorRepository.findById(detectorResponseDTO.getId()).get();
+
         SubscriberDTO subscriberDTO = new SubscriberDTO();
         subscriberDTO.setDetector(detector);
         subscriberDTO.setOwner(user);
+
         String response = userService.subscribe(subscriberDTO);
-        assertEquals("email notification about subscribe request has been sent",response);
+        assertEquals("Email notification about subscribe request has been sent", response);
     }
 }

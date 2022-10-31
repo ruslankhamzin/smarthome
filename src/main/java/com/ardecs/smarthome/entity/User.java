@@ -17,23 +17,16 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     private String id;
-
     private String email;
-
     private String password;
-
     private String fullname;
-
     private Instant lastLoginDate;
-
     private String phoneNumber;
-
     @CreatedDate
     private Instant registrationDate;
 
     @OneToMany(mappedBy = "owner")
     private List<Detector> detectors = new ArrayList<>();
-
     @ManyToMany
     @JoinTable(name = "subscriber",
             joinColumns = @JoinColumn(name = "user_id"),

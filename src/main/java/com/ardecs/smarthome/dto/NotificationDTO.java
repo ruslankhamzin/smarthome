@@ -7,11 +7,8 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class NotificationDTO implements Serializable {
-
     private Detector detector;
-
     private NotificationType type;
-
     private Instant date;
 
     public Detector getDetector() {

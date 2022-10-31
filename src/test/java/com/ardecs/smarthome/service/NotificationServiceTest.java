@@ -25,6 +25,7 @@ class NotificationServiceTest {
     DetectorService detectorService;
     @Autowired
     DetectorRepository detectorRepository;
+
     @Test
     void send() {
         User user = new User();
@@ -35,24 +36,31 @@ class NotificationServiceTest {
         user.setPassword("qwerty1");
         user.setRegistrationDate(Instant.now());
         user.setLastLoginDate(Instant.now());
+
         Location location = new Location();
         location.setId("d8f008a3-8864-4283-a202-d8464daab345");
         location.setSquare(33);
         location.setName("kitchen");
+
         DetectorDTO detectorDTO = new DetectorDTO();
         detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
-        DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);
+
+        DetectorResponseDTO detectorResponseDTO = detectorService.create(detectorDTO);
         Detector detector = detectorRepository.findById(detectorResponseDTO.getId()).get();
-       NotificationDTO notificationDTO = new NotificationDTO();
-       notificationDTO.setDate(Instant.now());
-       notificationDTO.setDetector(detector);
-       notificationDTO.setType(NotificationType.WEB);
-       String response = notificationService.send(notificationDTO);
-        assertEquals("Detector: " + notificationDTO.getDetector().getId() + " was activated in: " + notificationDTO.getDate(),response);
+
+        NotificationDTO notificationDTO = new NotificationDTO();
+        notificationDTO.setDate(Instant.now());
+        notificationDTO.setDetector(detector);
+        notificationDTO.setType(NotificationType.WEB);
+        String response = detectorService.activate(notificationDTO);
+
+        assertEquals("Detector: " + notificationDTO.getDetector().getId() + " was activated in: " + notificationDTO.getDate(), response);
+
         notificationDTO.setType(NotificationType.EMAIL);
         response = notificationService.send(notificationDTO);
-        assertEquals("email notification has been sent", response);
+
+        assertEquals("Email notification about activation has been sent", response);
     }
 }

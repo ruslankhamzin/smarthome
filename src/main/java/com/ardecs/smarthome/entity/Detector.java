@@ -3,7 +3,6 @@ package com.ardecs.smarthome.entity;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -18,29 +17,21 @@ import java.util.List;
 public class Detector implements Serializable {
     @Id
     private String id;
-
     private String description;
-
     private String name;
-
     private Instant lastActiveDate;
-
     private Boolean active;
-
     @CreatedDate
     private Instant registrationDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "owner_id", nullable = false)
+    @ManyToOne
+    @JoinColumn
     private User owner;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "location_id", nullable = false)
+    @ManyToOne
+    @JoinColumn
     private Location location;
-
     @OneToMany(mappedBy = "detector")
     private List<Notification> notifications = new ArrayList<>();
-
     @ManyToMany(mappedBy = "detectorSubscribers")
     private List<User> users = new ArrayList<>();
 

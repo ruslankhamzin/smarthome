@@ -6,23 +6,14 @@ import com.ardecs.smarthome.entity.User;
 import java.time.Instant;
 
 public class DetectorResponseDTO {
-
     private String id;
-
     private User owner;
-
     private Location location;
-
     private String description;
-
     private String name;
-
     private Instant registrationDate;
-
     private Instant lastActiveDate;
-
     private Boolean active;
-
     private String message;
 
     public String getId() {

@@ -31,18 +31,22 @@ class DetectorServiceTest {
         user.setPassword("qwerty1");
         user.setRegistrationDate(Instant.now());
         user.setLastLoginDate(Instant.now());
+
         Location location = new Location();
         location.setId("d8f008a3-8864-4283-a202-d8464daab345");
+
         DetectorDTO detectorDTO = new DetectorDTO();
         detectorDTO.setOwner(user);
         detectorDTO.setName("My first detector");
         detectorDTO.setLocation(location);
-        DetectorResponseDTO detectorResponseDTO=detectorService.create(detectorDTO);
+
+        DetectorResponseDTO detectorResponseDTO = detectorService.create(detectorDTO);
         Detector detector = detectorRepository.findById(detectorResponseDTO.getId()).get();
-        assertEquals(detectorResponseDTO.getName(),detector.getName());
-        assertEquals(detectorResponseDTO.getId(),detector.getId());
-        assertEquals(detectorResponseDTO.getActive(),detector.getActive());
-        assertEquals(detectorResponseDTO.getDescription(),detector.getDescription());
-        assertEquals(detectorResponseDTO.getLastActiveDate(),detector.getLastActiveDate());
+
+        assertEquals(detectorResponseDTO.getName(), detector.getName());
+        assertEquals(detectorResponseDTO.getId(), detector.getId());
+        assertEquals(detectorResponseDTO.getActive(), detector.getActive());
+        assertEquals(detectorResponseDTO.getDescription(), detector.getDescription());
+        assertEquals(detectorResponseDTO.getLastActiveDate(), detector.getLastActiveDate());
     }
 }

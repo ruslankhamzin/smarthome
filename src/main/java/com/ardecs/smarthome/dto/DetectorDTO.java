@@ -6,13 +6,9 @@ import com.ardecs.smarthome.entity.User;
 import java.io.Serializable;
 
 public class DetectorDTO implements Serializable {
-
     private User owner;
-
     private Location location;
-
     private String description;
-
     private String name;
 
     public User getOwner() {

@@ -22,23 +22,30 @@ public class NotificationService {
     private static final Logger LOGGER = LoggerFactory.getLogger(NotificationService.class);
     private static final ModelMapper MAPPER = new ModelMapper();
     private Map<NotificationType, NotificationStrategy> notificationStrategyMap;
-    private NotificationRepository notificationRepository;
-    private UserRepository userRepository;
-
     @Autowired
-    public NotificationService(Set<NotificationStrategy> notificationStrategyList, NotificationRepository notificationRepository, UserRepository userRepository) {
-        this.notificationRepository = notificationRepository;
-        this.userRepository = userRepository;
-        notificationStrategyMap = new HashMap<>();
-        notificationStrategyList.stream()
-                .forEach(notificationStrategy -> notificationStrategyMap.put(notificationStrategy.getType(), notificationStrategy));
-    }
+    private NotificationRepository notificationRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private Set<NotificationStrategy> notificationStrategySet;
 
     public String send(NotificationDTO notificationDTO) {
-       NotificationStrategy notificationStrategy = notificationStrategyMap.get(notificationDTO.getType());
-       Notification notification = notificationRepository.save(mapToNotification(notificationDTO));
-       LOGGER.info("Notification with data: " + notification + " has been saved.");
-       return notificationStrategy.sendActivationMessage(notificationDTO, userRepository.getSubscribers(notificationDTO.getDetector().getId()));
+        NotificationStrategy notificationStrategy = getNotificationStrategy(notificationDTO);
+        Notification notification = notificationRepository.save(mapToNotification(notificationDTO));
+
+        LOGGER.info("Notification with data: " + notification + " has been saved.");
+        return notificationStrategy.sendActivationMessage(notificationDTO, userRepository.getSubscribers(notificationDTO.getDetector().getId()));
+    }
+
+    private NotificationStrategy getNotificationStrategy(NotificationDTO notificationDTO) {
+        createNotificationStrategyMap(notificationStrategySet);
+        return notificationStrategyMap.get(notificationDTO.getType());
+    }
+
+    private void createNotificationStrategyMap(Set<NotificationStrategy> notificationStrategySet) {
+        notificationStrategyMap = new HashMap<>();
+        notificationStrategySet.stream()
+                .forEach(notificationStrategy -> notificationStrategyMap.put(notificationStrategy.getType(), notificationStrategy));
     }
 
     private Notification mapToNotification(NotificationDTO notificationDTO) {

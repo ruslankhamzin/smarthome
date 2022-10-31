@@ -6,9 +6,7 @@ import com.ardecs.smarthome.entity.User;
 import java.io.Serializable;
 
 public class SubscriberDTO implements Serializable {
-
     private Detector detector;
-
     private User owner;
 
     public Detector getDetector() {

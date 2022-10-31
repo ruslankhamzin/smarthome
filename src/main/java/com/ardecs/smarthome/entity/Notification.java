@@ -3,7 +3,6 @@ package com.ardecs.smarthome.entity;
 import com.ardecs.smarthome.strategy.NotificationType;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,11 +12,10 @@ import java.io.Serializable;
 public class Notification implements Serializable {
     @Id
     private String id;
-
     private NotificationType type;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "detector_id", nullable = false)
+    @ManyToOne
+    @JoinColumn
     private Detector detector;
 
     public NotificationType getType() {
